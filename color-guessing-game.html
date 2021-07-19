@@ -1,0 +1,52 @@
+<!-- This project is a color guessing game demonstrating my ability to combine
+HTML, CSS, and JavaScript together -->
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset="utf-8" >
+    <title>Color Guessing Game</title>
+</head>
+<body>
+    <h1>Color Guessing Game</h1>
+    <button type="button" onclick="runGame()">Start Game</button>
+    <script>
+        const COLORS_ARRAY=['blue', 'cyan', 'gold', 'gray', 'green', 'magenta', 'orange', 'red', 'white', 'yellow'];
+        const COLORS_ARRAY2 = COLORS_ARRAY.join(", ");
+        function runGame() {
+            let numTries = 0;
+            let guess = " ";
+            let correct = false;
+            const targetIndex = Math.floor(Math.random()*(10));
+            const target=COLORS_ARRAY[targetIndex];
+            console.log(COLORS_ARRAY);
+            do {
+                numTries += 1
+                guess = prompt('I am thinking of one of these colors:\n\n' + COLORS_ARRAY2 +
+                    ' What color am I thinking of?\n');
+                if(guess===null) {
+                    alert("See you next time!");
+                    return
+                }
+                correct=checkGuess(guess,target);
+            } while(!correct);
+            alert("Congratulations! The correct color is "+target+"! It took you "+numTries+
+            " number of times to get it right.");
+            document.body.style.background = guess;
+        }
+        function checkGuess(guess,target) { 
+            let correct=false;
+            if (!COLORS_ARRAY.includes(guess)) {
+                alert('Your guess is not in the list');
+            }
+            else if (guess>target || guess<target) {
+                alert("That's not quite right. Guess again!");
+            }
+            else {
+                correct=true;
+                alert("That's right!");
+            }
+            return correct;
+        }
+    </script>
+</body>
+</html>
